@@ -27,6 +27,7 @@ public class BlockCobblestones extends BasicBlockFalling
 
     public int damageDropped(IBlockState state)
     {
+    	
         return ((BlockCobblestones.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
