@@ -1,2 +1,2 @@
 # SmallRealism
-Minecraft realism, compatible with other mods
+Minecraft realism, compatible with other mods.
