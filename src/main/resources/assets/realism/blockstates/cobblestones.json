@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "variant=granite": { "model": "realism:cobblestones/granite" },
+    "variant=diorite": { "model": "realism:cobblestones/diorite" },
+    "variant=andesite": { "model": "realism:cobblestones/andesite" }
+  }
+}

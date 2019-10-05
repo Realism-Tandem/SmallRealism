@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"variant=r_spruce": { "model": "realism:rottenplanks/spruce" },
+	"variant=r_birch": { "model": "realism:rottenplanks/birch" },
+	"variant=r_jungle": { "model": "realism:rottenplanks/jungle" },
+	"variant=r_oak": { "model": "realism:rottenplanks/oak" },
+	"variant=r_acacia": { "model": "realism:rottenplanks/acacia" },
+	"variant=r_dark_oak": { "model": "realism:rottenplanks/dark_oak" }
+  }
+}
