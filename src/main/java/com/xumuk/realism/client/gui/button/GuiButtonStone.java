@@ -21,6 +21,7 @@ public class GuiButtonStone extends GuiButton {
 	public void onClick() {
 		if (this.enabled) {
 			this.visible = false;
+			//TODO: Custom packets
 //			TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(this.id));
 		}
 	}

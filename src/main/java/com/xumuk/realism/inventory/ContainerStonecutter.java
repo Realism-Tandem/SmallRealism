@@ -1,6 +1,7 @@
 package com.xumuk.realism.inventory;
 
 import com.xumuk.realism.inventory.slot.SlotStoneOutput;
+import com.xumuk.realism.utils.IButtonHandler;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

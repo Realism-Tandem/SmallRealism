@@ -3,6 +3,7 @@ package com.xumuk.realism;
 import com.xumuk.realism.command.RealismCommand;
 import com.xumuk.realism.creativetabs.MainRealism;
 import com.xumuk.realism.proxy.CommonProxy;
+import com.xumuk.realism.utils.SRLogManager;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +20,7 @@ public class RealismCore {
 	public static final String MODID = "realism";
 	public static final String VERSION = "0.1 alpha";
 	public static CreativeTabs tabMain = new MainRealism("tabMain");
+	public static SRLogManager logger = new SRLogManager();
 
 	@Mod.Instance
 	public static RealismCore INSTANCE;

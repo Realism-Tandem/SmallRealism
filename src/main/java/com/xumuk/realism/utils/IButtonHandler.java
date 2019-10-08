@@ -1,4 +1,4 @@
-package com.xumuk.realism.inventory;
+package com.xumuk.realism.utils;
 
 import javax.annotation.Nullable;
 

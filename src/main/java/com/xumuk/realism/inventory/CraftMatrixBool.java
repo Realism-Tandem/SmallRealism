@@ -1,7 +1,10 @@
 package com.xumuk.realism.inventory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
+import org.apache.logging.log4j.Level;
+
+import com.xumuk.realism.RealismCore;
 
 import net.minecraft.item.ItemStack;
 
@@ -14,7 +17,7 @@ public class CraftMatrixBool {
 	private boolean dirty = false;
 	private final int width;
 	private final int height;
-	private List<CraftRecipeBool> recipes = new ArrayList();
+	private HashMap<String, String[]> recipes = new HashMap();
 
 	public CraftMatrixBool() {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -48,22 +51,24 @@ public class CraftMatrixBool {
 		for (int i = 0; i < width * height; i++) if (other.matrix[i] != this.matrix[i]) return false;
 		return true;
 	}
-	
-	public void setRecipe(CraftRecipeBool recipe) {
-		recipes.add(recipe);
+
+	public void putRecipe(String key, String[] recipe) {
+		if (!recipes.containsKey(key)) recipes.put(key, recipe);
+		else RealismCore.logger.log(Level.ERROR,
+				String.format("Error of registry recipe \"/*\": Recipe with name registered yet!", key));
 	}
-	
-	public void removeRecipe(CraftRecipeBool recipe) {
-		recipes.remove(recipe);
+
+	public void removeRecipe(String key, String[] recipe) {
+		recipes.remove(key, recipe);
 	}
-	
+
 	public ItemStack getRecipeResult() {
-		//TODO: create matches recipes
+		// TODO: Create matches recipes
 		return ItemStack.EMPTY;
 	}
-	
+
 	public void setDirty() {
-		if(!dirty) this.dirty = true;
+		if (!dirty) this.dirty = true;
 	}
 
 	public int getWidth() { return width; }
