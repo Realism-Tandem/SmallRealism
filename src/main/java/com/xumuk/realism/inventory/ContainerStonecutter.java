@@ -1,11 +1,13 @@
 package com.xumuk.realism.inventory;
 
 import com.xumuk.realism.inventory.slot.SlotStoneOutput;
+import com.xumuk.realism.utils.CraftMatrixBool;
 import com.xumuk.realism.utils.IButtonHandler;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ContainerStonecutter extends SRContainer implements IButtonHandler {
@@ -13,8 +15,8 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 	private CraftMatrixBool matrix = new CraftMatrixBool();
 	private ItemStack out = ItemStack.EMPTY;
 
-	public ContainerStonecutter(InventoryPlayer playerInv) {
-		super(playerInv);
+	public ContainerStonecutter(InventoryPlayer playerInv, World world) {
+		super(playerInv, world);
 	}
 
 	@Override
