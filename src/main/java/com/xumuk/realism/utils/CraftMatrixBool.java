@@ -1,7 +1,5 @@
 package com.xumuk.realism.utils;
 
-import java.util.HashMap;
-
 import net.minecraft.item.ItemStack;
 
 public class CraftMatrixBool {

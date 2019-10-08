@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Level;
 
 public class RegRecipes {
 
-	protected static Map<String, String[]> RECIPES = new HashMap();
+	private static Map<String, String[]> RECIPES = new HashMap();
 
 	public static void register() {
 
@@ -22,4 +22,6 @@ public class RegRecipes {
 	public void removeRecipe(String key, String[] recipe) {
 		RECIPES.remove(key, recipe);
 	}
+	
+	public static Map<String, String[]> getStoneRecipes() { return RECIPES; }
 }
