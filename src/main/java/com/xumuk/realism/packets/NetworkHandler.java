@@ -14,7 +14,7 @@ public class NetworkHandler {
 
 	private short id;
 
-	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
+	public final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
 
 	public void init() {
 		// network.registerMessage(WSDCoordToClient.Handler.class,
@@ -39,15 +39,15 @@ public class NetworkHandler {
 		}
 	}
 	
-    public static void sendToAll(SRSimplePacket packet) {
+    public void sendToAll(SRSimplePacket packet) {
         NETWORK.sendToAll(packet);
     }
 
-	public static void sendTo(final IMessage message, final EntityPlayerMP player) {
+	public void sendTo(final IMessage message, final EntityPlayerMP player) {
 		NETWORK.sendTo(message, player);
 	}
 
-	public static void sendToServer(final IMessage message) {
+	public void sendToServer(final IMessage message) {
 		NETWORK.sendToServer(message);
 	}
 }
