@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.xumuk.realism.utils.SRUtils;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class RegRecipes {
@@ -14,7 +15,7 @@ public class RegRecipes {
 	private static Map<ItemStack, boolean[][]> RECIPES = new HashMap();
 
 	public static void register() {
-		//TODO: Recipes
+		putStoneRecipe(new int[][] { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } }, new ItemStack(Items.APPLE));
 	}
 
 	public static void putStoneRecipe(int[][] recipe, ItemStack output) {
@@ -33,9 +34,7 @@ public class RegRecipes {
 	private static boolean[][] parseRecipe(int[][] recipe) {
 		boolean[][] matrix = new boolean[recipe.length][recipe[0].length];
 		for (int x = 0; x < recipe.length; ++x) {
-			for (int y = 0; y < recipe[x].length; ++y) {
-				matrix[x][y] = SRUtils.intToBoolean(recipe[x][y]);
-			}
+			for (int y = 0; y < recipe[x].length; ++y) { matrix[x][y] = SRUtils.intToBoolean(recipe[x][y]); }
 		}
 		return matrix;
 	}

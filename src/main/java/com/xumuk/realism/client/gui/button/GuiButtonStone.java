@@ -2,6 +2,9 @@ package com.xumuk.realism.client.gui.button;
 
 import javax.annotation.Nonnull;
 
+import com.xumuk.realism.RealismCore;
+import com.xumuk.realism.packets.PacketGuiButton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -21,8 +24,7 @@ public class GuiButtonStone extends GuiButton {
 	public void onClick() {
 		if (this.enabled) {
 			this.visible = false;
-			//TODO: Custom packets
-//			TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(this.id));
+			RealismCore.network_handler.sendToServer(new PacketGuiButton(this.id));
 		}
 	}
 
