@@ -24,7 +24,7 @@ public class CraftMatrixBool {
 	}
 
 	public void setAll() {
-		for (int x = 0; x < matrix[width].length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = true;
+		for (int x = 0; x < matrix.length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = true;
 	}
 
 	public void set(int x, int y) {
@@ -36,7 +36,7 @@ public class CraftMatrixBool {
 	}
 
 	public void removeAll() {
-		for (int x = 0; x < matrix[width].length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = false;
+		for (int x = 0; x < matrix.length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = false;
 	}
 
 	public boolean isEqual(CraftMatrixBool other) {
