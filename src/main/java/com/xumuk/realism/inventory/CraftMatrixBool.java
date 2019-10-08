@@ -11,7 +11,7 @@ public class CraftMatrixBool {
 	public static final int DEFAULT_HEIGHT = 5;
 
 	private final boolean[][] matrix;
-	private final boolean change = false;
+	private boolean dirty = false;
 	private final int width;
 	private final int height;
 	private List<CraftRecipeBool> recipes = new ArrayList();
@@ -61,12 +61,16 @@ public class CraftMatrixBool {
 		//TODO: create matches recipes
 		return ItemStack.EMPTY;
 	}
+	
+	public void setDirty() {
+		if(!dirty) this.dirty = true;
+	}
 
 	public int getWidth() { return width; }
 
 	public int getHeight() { return height; }
 
-	public boolean isHasOut() { return change; }
+	public boolean isDirty() { return dirty; }
 
 	public boolean[][] getMatrix() { return matrix; }
 }

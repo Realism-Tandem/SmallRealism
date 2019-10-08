@@ -18,7 +18,9 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 
 	@Override
 	public void onButtonPress(int buttonID, NBTTagCompound extraNBT) {
-		putStackInSlot(0, out = matrix.getRecipeResult());
+		ItemStack stack = matrix.getRecipeResult();
+		if (stack != ItemStack.EMPTY) putStackInSlot(0, out = matrix.getRecipeResult());
+		matrix.setDirty();
 	}
 
 	public ItemStack getOutStack() { return out; }
