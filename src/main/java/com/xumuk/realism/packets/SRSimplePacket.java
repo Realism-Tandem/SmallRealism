@@ -17,7 +17,7 @@ public abstract class SRSimplePacket implements IMessage, IMessageHandler<SRSimp
 	@Override
 	public SRSimplePacket onMessage(SRSimplePacket sp, MessageContext ctx) {
 		if (ctx.side.isServer()) sp.server(ctx.getServerHandler().player);
-		else sp.client(clientPlayer());
+		else sp.client(clientPlayer(), ctx);
 		return null;
 	}
 
@@ -25,7 +25,7 @@ public abstract class SRSimplePacket implements IMessage, IMessageHandler<SRSimp
 		return buf != null ? buf : (buf = Unpooled.buffer());
 	}
 
-	public abstract void client(EntityPlayer player);
+	public abstract void client(EntityPlayer player, MessageContext ctx);
 
 	public abstract void server(EntityPlayerMP player);
 

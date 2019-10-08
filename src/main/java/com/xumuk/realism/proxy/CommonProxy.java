@@ -1,5 +1,7 @@
 package com.xumuk.realism.proxy;
 
+import javax.annotation.Nonnull;
+
 import com.xumuk.realism.RealismCore;
 import com.xumuk.realism.RegBlocks;
 import com.xumuk.realism.RegItems;
@@ -11,13 +13,16 @@ import com.xumuk.realism.capability.worldCAP.DateStorage;
 import com.xumuk.realism.capability.worldCAP.IDate;
 import com.xumuk.realism.event.RegEvents;
 
+import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class CommonProxy {
+public class CommonProxy implements IProxy {
 
+	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		RegItems.register();
 		RegBlocks.register();
@@ -28,9 +33,18 @@ public class CommonProxy {
 		RealismCore.network_handler.init();
 	}
 
+	@Override
 	public void init(FMLInitializationEvent event) {
 		RegRecipes.register();
 	}
 
+	@Override
 	public void postInit(FMLPostInitializationEvent event) {}
+	
+	@Override
+	@Nonnull
+	public IThreadListener getThreadListener(MessageContext context) throws Exception {
+		if (context.side.isServer()) return context.getServerHandler().player.mcServer;
+		else throw new Exception("Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
+	}
 }

@@ -5,6 +5,7 @@ import com.xumuk.realism.capability.worldCAP.IDate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MonthSyncMessage extends SRSimplePacket {
 
@@ -15,7 +16,7 @@ public class MonthSyncMessage extends SRSimplePacket {
 	}
 
 	@Override
-	public void client(EntityPlayer player) {
+	public void client(EntityPlayer player, MessageContext ctx) {
 		if (player != null) {
 			IDate cap = player.getEntityWorld().getCapability(DateProvider.DATE, null);
 			if (cap != null) cap.setMonth(buf().readByte());
