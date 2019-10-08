@@ -14,7 +14,7 @@ public class RegRecipes {
 	private static Map<ItemStack, boolean[][]> RECIPES = new HashMap();
 
 	public static void register() {
-		
+		//TODO: Recipes
 	}
 
 	public static void putStoneRecipe(int[][] recipe, ItemStack output) {
