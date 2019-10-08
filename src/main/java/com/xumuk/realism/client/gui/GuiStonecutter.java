@@ -61,11 +61,7 @@ public class GuiStonecutter extends SRGuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		if (inventorySlots instanceof ContainerStonecutter && ((ContainerStonecutter) inventorySlots).requiresReset) {
-			for (GuiButton button : buttonList) {
-				if (button instanceof GuiButtonStone) {
-					button.visible = false;
-				}
-			}
+			for (GuiButton button : buttonList) if (button instanceof GuiButtonStone) button.visible = false;
 			((ContainerStonecutter) inventorySlots).requiresReset = false;
 		}
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
