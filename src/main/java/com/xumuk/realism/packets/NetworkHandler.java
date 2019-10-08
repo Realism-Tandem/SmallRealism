@@ -38,12 +38,16 @@ public class NetworkHandler {
 			e.printStackTrace();
 		}
 	}
+	
+    public static void sendToAll(SRSimplePacket packet) {
+        NETWORK.sendToAll(packet);
+    }
 
-	public void sendTo(final IMessage message, final EntityPlayerMP player) {
+	public static void sendTo(final IMessage message, final EntityPlayerMP player) {
 		NETWORK.sendTo(message, player);
 	}
 
-	public void sendToServer(final IMessage message) {
+	public static void sendToServer(final IMessage message) {
 		NETWORK.sendToServer(message);
 	}
 }
