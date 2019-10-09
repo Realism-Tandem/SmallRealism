@@ -1,5 +1,7 @@
 package com.xumuk.realism.utils;
 
+import com.xumuk.realism.recipes.ListRecipeManager;
+
 import net.minecraft.item.ItemStack;
 
 public class CraftMatrixBool {
@@ -45,7 +47,7 @@ public class CraftMatrixBool {
 	}
 
 	private ItemStack getRecipeResult() {
-		// TODO: Create matches recipes
+		ListRecipeManager.STONE_RECIPES.constainsAndGetValue(matrix);
 		return ItemStack.EMPTY;
 	}
 

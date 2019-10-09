@@ -13,7 +13,6 @@ public class SlotStoneOutput extends SlotItemHandler {
 	public SlotStoneOutput(IItemHandler inventory, int idx, int x, int y, Runnable onSlotTake) {
 		super(inventory, idx, x, y);
 		this.onSlotTake = onSlotTake;
-		System.out.println("false");
 	}
 
 	@Override

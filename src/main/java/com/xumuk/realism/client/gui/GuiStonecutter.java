@@ -5,9 +5,7 @@ import static com.xumuk.realism.RealismCore.MODID;
 import com.xumuk.realism.client.button.GuiButtonStone;
 import com.xumuk.realism.inventory.ContainerStonecutter;
 
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -65,20 +63,18 @@ public class GuiStonecutter extends SRGuiContainer {
 			((ContainerStonecutter) inventorySlots).setRequiresResetToFalse();
 		}
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-		GlStateManager.color(1, 1, 1, 1);
-		mc.getTextureManager().bindTexture(BUTTON);
-		for (GuiButton button : buttonList) {
-			if (!button.visible) {
-				Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
-			}
-		}
+//		GlStateManager.color(1, 1, 1, 1);
+//		mc.getTextureManager().bindTexture(BUTTON);
+//		for (GuiButton button : buttonList) {
+//			if (!button.visible) {
+//				Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);
+//			}
+//		}
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		if (button instanceof GuiButtonStone) {
-			((GuiButtonStone) button).onClick();
-			button.playPressSound(mc.getSoundHandler());
-		}
+		((GuiButtonStone) button).onClick();
+		button.playPressSound(mc.getSoundHandler());
 	}
 }

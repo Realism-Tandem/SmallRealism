@@ -31,7 +31,6 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 
 	@Override
 	public void addContainerSlots() {
-		System.out.println("true");
 		addSlotToContainer(new SlotStoneOutput(new ItemStackHandler(1), 0, 128, 44, this::reset));
 	}
 	

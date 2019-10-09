@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 public abstract class SRContainer extends Container {
 	private boolean isOffhand;
 	private World world;
+	private int idFixedSlot = -1;
 
 	public SRContainer(InventoryPlayer playerInv, World world) {
 		this.world = world;
@@ -63,11 +64,11 @@ public abstract class SRContainer extends Container {
 	protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
 			}
 		}
 
-		for (int k = 0; k < 9; k++) addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+		for (int k = 0; k < 9; k++) addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 160));
 	}
 
 	public boolean isOffhand() { return isOffhand; }
