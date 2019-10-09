@@ -24,7 +24,10 @@ public class PacketGuiButton extends SRSimplePacket {
 	}
 
 	@Override
-	public void client(EntityPlayer player, MessageContext ctx) {
+	public void client(EntityPlayer player, MessageContext ctx) {}
+
+	@Override
+	public void server(EntityPlayerMP player, MessageContext ctx) {
 		if (player != null) {
 			try {
 				RealismCore.proxy.getThreadListener(ctx).addScheduledTask(() -> {
@@ -36,7 +39,4 @@ public class PacketGuiButton extends SRSimplePacket {
 			} catch (Exception e) { e.printStackTrace(); }
 		}
 	}
-
-	@Override
-	public void server(EntityPlayerMP player) {}
 }

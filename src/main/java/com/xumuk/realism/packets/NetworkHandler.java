@@ -3,10 +3,6 @@ package com.xumuk.realism.packets;
 import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 import static net.minecraftforge.fml.relauncher.Side.SERVER;
 
-import org.apache.logging.log4j.Level;
-
-import static com.xumuk.realism.RealismCore.logger;
-
 import com.xumuk.realism.RealismCore;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,7 +24,7 @@ public class NetworkHandler {
 		registerMessage(DaySyncMessage.class);
 		registerMessage(MonthSyncMessage.class);
 		registerMessage(YearSyncMessage.class);
-		registerMessage(PacketGuiButton.class, CLIENT);
+		registerMessage(PacketGuiButton.class, SERVER);
 		
 		// network.registerMessage(PlayerWeightMessage.Handler.class,
 		// PlayerWeightMessage.class, 4, Side.CLIENT);

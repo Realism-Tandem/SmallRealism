@@ -23,7 +23,7 @@ public class YearSyncMessage extends SRSimplePacket {
 	}
 
 	@Override
-	public void server(EntityPlayerMP player) {
+	public void server(EntityPlayerMP player, MessageContext ctx) {
 		IDate date = player.getEntityWorld().getCapability(DateProvider.DATE, null);
 		if (date != null) date.setYear(buf().readInt());
 	}

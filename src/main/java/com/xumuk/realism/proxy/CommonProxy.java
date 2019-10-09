@@ -1,7 +1,5 @@
 package com.xumuk.realism.proxy;
 
-import static com.xumuk.realism.RealismCore.logger;
-
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.Level;
@@ -34,11 +32,11 @@ public class CommonProxy implements IProxy {
 
 		CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
 		CapabilityManager.INSTANCE.register(IDate.class, DateStorage.INSTANCE, DateStorage.INSTANCE);
-		
+
 		try {
 			RealismCore.network_handler.init();
 		} catch (Exception e) {
-			logger.log(Level.FATAL, "Packets don't registered! This is fatal error.");
+			RealismCore.logger.log(Level.FATAL, "Packets don't registered! This is fatal error.");
 			e.printStackTrace();
 		}
 	}
