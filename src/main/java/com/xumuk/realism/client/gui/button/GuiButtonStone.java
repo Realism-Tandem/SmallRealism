@@ -15,16 +15,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiButtonStone extends GuiButton {
 	private final ResourceLocation texture;
+	private final int idX;
+	private final int idY;
 
-	public GuiButtonStone(int id, int x, int y, int width, int height, ResourceLocation texture) {
+	public GuiButtonStone(int id, int idX, int idY, int x, int y, int width, int height, ResourceLocation texture) {
 		super(id, x, y, width, height, "");
 		this.texture = texture;
+		this.idX = idX;
+		this.idY = idY;
 	}
 
 	public void onClick() {
 		if (this.enabled) {
 			this.visible = false;
-			RealismCore.network_handler.sendToServer(new PacketGuiButton(this.id));
+			RealismCore.network_handler.sendToServer(new PacketGuiButton(this.idX, this.idY));
 		}
 	}
 

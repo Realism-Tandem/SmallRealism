@@ -20,23 +20,22 @@ public class CraftMatrixBool {
 		this.width = width;
 		this.height = height;
 		matrix = new boolean[this.width][this.height];
-		setAll();
+		refreshMatrix();
 	}
 
-	public void setAll() {
-		for (int x = 0; x < matrix.length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = true;
-	}
-
-	public void set(int x, int y) {
+	public ItemStack set(int x, int y) {
 		matrix[x][y] = true;
+		return getRecipeResult();
 	}
 
-	public void remove(int x, int y) {
+	public ItemStack remove(int x, int y) {
 		matrix[x][y] = false;
+		return getRecipeResult();
 	}
 
 	public void removeAll() {
 		for (int x = 0; x < matrix.length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = false;
+		setDirty();
 	}
 
 	public boolean isEqual(CraftMatrixBool other) {
@@ -45,13 +44,22 @@ public class CraftMatrixBool {
 		return true;
 	}
 
-	public ItemStack getRecipeResult() {
+	private ItemStack getRecipeResult() {
 		// TODO: Create matches recipes
 		return ItemStack.EMPTY;
 	}
 
 	public void setDirty() {
 		if (!dirty) this.dirty = true;
+	}
+	
+	public void refreshMatrix() {
+		for (int x = 0; x < matrix.length; ++x) for (int y = 0; y < matrix[x].length; ++y) matrix[x][y] = true;
+		setNotDirty();
+	}
+	
+	public void setNotDirty() {
+		if (dirty) this.dirty = false;
 	}
 
 	public int getWidth() { return width; }

@@ -13,25 +13,25 @@ import net.minecraftforge.items.ItemStackHandler;
 public class ContainerStonecutter extends SRContainer implements IButtonHandler {
 
 	private CraftMatrixBool matrix = new CraftMatrixBool();
-	private ItemStack out = ItemStack.EMPTY;
 
 	public ContainerStonecutter(InventoryPlayer playerInv, World world) {
 		super(playerInv, world);
 	}
 
 	@Override
-	public void onButtonPress(int buttonID, NBTTagCompound extraNBT) {
-		ItemStack stack = matrix.getRecipeResult();
-		if (stack != ItemStack.EMPTY) putStackInSlot(0, out = matrix.getRecipeResult());
+	public void onButtonPress(int idX, int idY, NBTTagCompound extraNBT) {
+		ItemStack out = matrix.set(idX, idY);
+		if (out != ItemStack.EMPTY) putStackInSlot(0, out);
+	}
+
+	public void setRequiresResetToFalse() {
 		matrix.setDirty();
 	}
 
-	public ItemStack getOutStack() { return out; }
+	public boolean isRequiresReset() { return matrix.isDirty(); }
 
 	@Override
 	protected void addContainerSlots() {
 		addSlotToContainer(new SlotStoneOutput(new ItemStackHandler(1), 0, 128, 44, matrix::removeAll));
 	}
-	
-	//TODO: Add requires reset matrix without packets
 }

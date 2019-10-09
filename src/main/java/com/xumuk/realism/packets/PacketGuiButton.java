@@ -13,14 +13,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketGuiButton extends SRSimplePacket {
 
-	public PacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
-		buf().writeInt(buttonID);
+	public PacketGuiButton(int idX, int idY, @Nullable NBTTagCompound extraNBT) {
+		buf().writeInt(idX);
+		buf().writeInt(idY);
 		buf().writeBoolean(extraNBT != null);
 		if (extraNBT != null) ByteBufUtils.writeTag(buf(), extraNBT);
 	}
 
-	public PacketGuiButton(int buttonID) {
-		this(buttonID, null);
+	public PacketGuiButton(int idX, int idY) {
+		this(idX, idY, null);
 	}
 
 	@Override
@@ -32,11 +33,13 @@ public class PacketGuiButton extends SRSimplePacket {
 			try {
 				RealismCore.proxy.getThreadListener(ctx).addScheduledTask(() -> {
 					if (player.openContainer instanceof IButtonHandler) {
-						((IButtonHandler) player.openContainer).onButtonPress(buf().readInt(),
+						((IButtonHandler) player.openContainer).onButtonPress(buf().readInt(), buf().readInt(),
 								buf().readBoolean() ? ByteBufUtils.readTag(buf()) : null);
 					}
 				});
-			} catch (Exception e) { e.printStackTrace(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

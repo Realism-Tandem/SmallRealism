@@ -16,14 +16,14 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class GuiStonecutter extends SRGuiContainer {
 
-	private static final ResourceLocation BG = new ResourceLocation(MODID, "textures/gui/knapping.png");
-	private static final ResourceLocation BUTTON = new ResourceLocation(MODID, "textures/gui/knapping/clay_button_disabled.png");
+	private static final ResourceLocation BG = new ResourceLocation(MODID, "textures/gui/stonecutter.png");
+	private static final ResourceLocation BUTTON = new ResourceLocation(MODID, "textures/gui/stonecutter_button.png");
 
 	private final ResourceLocation buttonTexture;
 
-	public GuiStonecutter(Container container, InventoryPlayer playerInv, ResourceLocation buttonTexture) {
+	public GuiStonecutter(Container container, InventoryPlayer playerInv) {
 		super(container, playerInv, BG);
-		this.buttonTexture = buttonTexture;
+		this.buttonTexture = BUTTON;
 		ySize = 184;
 	}
 
@@ -34,7 +34,7 @@ public class GuiStonecutter extends SRGuiContainer {
 			for (int y = 0; y < 5; y++) {
 				int bx = (width - xSize) / 2 + 12 + 16 * x;
 				int by = (height - ySize) / 2 + 12 + 16 * y;
-				addButton(new GuiButtonStone(x + 5 * y, bx, by, 16, 16, buttonTexture));
+				addButton(new GuiButtonStone(x + 5 * y, x, y, bx, by, 16, 16, buttonTexture));
 			}
 		}
 	}
@@ -60,9 +60,9 @@ public class GuiStonecutter extends SRGuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		if (inventorySlots instanceof ContainerStonecutter && ((ContainerStonecutter) inventorySlots).requiresReset) {
+		if (inventorySlots instanceof ContainerStonecutter && ((ContainerStonecutter) inventorySlots).isRequiresReset()) {
 			for (GuiButton button : buttonList) if (button instanceof GuiButtonStone) button.visible = false;
-			((ContainerStonecutter) inventorySlots).requiresReset = false;
+			((ContainerStonecutter) inventorySlots).setRequiresResetToFalse();
 		}
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		GlStateManager.color(1, 1, 1, 1);
