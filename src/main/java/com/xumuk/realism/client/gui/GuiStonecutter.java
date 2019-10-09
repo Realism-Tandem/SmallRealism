@@ -2,7 +2,7 @@ package com.xumuk.realism.client.gui;
 
 import static com.xumuk.realism.RealismCore.MODID;
 
-import com.xumuk.realism.client.gui.button.GuiButtonStone;
+import com.xumuk.realism.client.button.GuiButtonStone;
 import com.xumuk.realism.inventory.ContainerStonecutter;
 
 import net.minecraft.client.gui.Gui;

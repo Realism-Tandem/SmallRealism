@@ -1,4 +1,4 @@
-package com.xumuk.realism.client.gui.button;
+package com.xumuk.realism.client.button;
 
 import javax.annotation.Nonnull;
 

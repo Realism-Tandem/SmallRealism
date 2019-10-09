@@ -236,7 +236,7 @@ public class AnnotationHooks {
 				}
 				if (worldIn.getLightFromNeighbors(pos.up()) >= 5)
 				{
-					//	TODO: сделать чтобы саженцы росли строго в своих биомах(ели в тайге, джангл в джунглях итд)
+					//	 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ)
 					/* 	int randSapl = worldIn.rand.nextInt(4);
                   	if(worldIn.isAirBlock(pos.up()) && date.getSeason() != Season.WINTER && worldIn.rand.nextInt(1300) == 232) {
                 		worldIn.setBlockState(pos.up(), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.byMetadata(randSapl)));

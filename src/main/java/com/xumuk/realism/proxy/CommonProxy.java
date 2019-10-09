@@ -8,6 +8,7 @@ import com.xumuk.realism.RealismCore;
 import com.xumuk.realism.RegBlocks;
 import com.xumuk.realism.RegItems;
 import com.xumuk.realism.RegRecipes;
+import com.xumuk.realism.SRGuiHandler;
 import com.xumuk.realism.capability.playerCAP.IPlayerCap;
 import com.xumuk.realism.capability.playerCAP.PlayerCap;
 import com.xumuk.realism.capability.playerCAP.PlayerCapStorage;
@@ -20,6 +21,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy implements IProxy {
@@ -44,6 +46,7 @@ public class CommonProxy implements IProxy {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		RegRecipes.register();
+		NetworkRegistry.INSTANCE.registerGuiHandler(RealismCore.INSTANCE, new SRGuiHandler());
 	}
 
 	@Override
