@@ -7,11 +7,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 
-public class RModelLoader implements ICustomModelLoader{
+public class RModelLoader implements ICustomModelLoader {
 
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager) {
-		// TODO Auto-generated method stub
+		// TODO: Resource reload on Minecraft reloads
 		
 	}
 
