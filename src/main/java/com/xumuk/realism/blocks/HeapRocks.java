@@ -2,11 +2,14 @@ package com.xumuk.realism.blocks;
 
 import java.util.Random;
 
+import com.xumuk.realism.RegItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -51,6 +54,11 @@ public class HeapRocks extends Block {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return HEAP_ROCKS_AABB;
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return RegItems.ITEM_ROCK;
 	}
 
 	@Override

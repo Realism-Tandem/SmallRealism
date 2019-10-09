@@ -1,6 +1,7 @@
 package com.xumuk.realism;
 
 import com.xumuk.realism.basic.BasicItem;
+import com.xumuk.realism.items.ItemRock;
 import com.xumuk.realism.items.ItemSlice;
 import com.xumuk.realism.items.tools.BasicShowel;
 
@@ -20,6 +21,8 @@ public class RegItems {
 	public static final Item SCALE = new ItemSlice("item_stone", RealismCore.tabMain);
 	public static final Item CLUMPCLAY = new BasicItem("item_clumpclay", RealismCore.tabMain);
 	public static final Item HANDFUL_DIRT = new BasicItem("item_hf_dirt", RealismCore.tabMain);
+	public static final Item ITEM_ROCK = new ItemRock("item_rock");
+	
 	public static void register() {
 		registerItems(SCALE);
 		registerItems(CLUMPCLAY);
@@ -30,6 +33,7 @@ public class RegItems {
 		registerItems(IRON_SHOWEL);
 		registerItems(ARM_STEEL_SHOWEL);
 		registerItems(STEEL_SHOWEL);
+		registerItems(ITEM_ROCK);
 	}
 	public static void registerRender() {
 		registerItemsRender(CLUMPCLAY);
@@ -40,6 +44,7 @@ public class RegItems {
 		registerItemsRender(IRON_SHOWEL);
 		registerItemsRender(ARM_STEEL_SHOWEL);
 		registerItemsRender(STEEL_SHOWEL);
+		registerItemsRender(ITEM_ROCK);
 	}
 
 	private static void registerItems(Item item) {
@@ -48,6 +53,4 @@ public class RegItems {
 	private static void registerItemsRender(Item item) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
-
-
 }
