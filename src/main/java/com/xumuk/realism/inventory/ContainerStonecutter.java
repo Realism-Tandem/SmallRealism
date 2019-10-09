@@ -12,10 +12,11 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class ContainerStonecutter extends SRContainer implements IButtonHandler {
 
-	private CraftMatrixBool matrix = new CraftMatrixBool();
+	private CraftMatrixBool matrix;
 
 	public ContainerStonecutter(InventoryPlayer playerInv, World world) {
 		super(playerInv, world);
+		matrix = new CraftMatrixBool();
 	}
 
 	@Override

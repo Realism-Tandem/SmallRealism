@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -28,12 +29,12 @@ public abstract class SRSimplePacket implements IMessage, IMessageHandler<SRSimp
     /**
      * This method work on client side
      */
-	public abstract void client(EntityPlayerSP player, MessageContext ctx);
+	public void client(EntityPlayer player, MessageContext ctx) {};
 
     /**
      * This method work on server side
      */
-	public abstract void server(EntityPlayerMP player, MessageContext ctx);
+	public void server(EntityPlayerMP player, MessageContext ctx) {};
 
 	@Override
 	public final void fromBytes(ByteBuf buf) {

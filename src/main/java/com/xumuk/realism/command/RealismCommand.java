@@ -1,13 +1,14 @@
 package com.xumuk.realism.command;
 
+import static com.xumuk.realism.RealismCore.network_handler;
+
 import com.xumuk.realism.capability.playerCAP.IPlayerCap;
 import com.xumuk.realism.capability.playerCAP.PlayerCapProvider;
 import com.xumuk.realism.capability.worldCAP.DateProvider;
 import com.xumuk.realism.capability.worldCAP.IDate;
-import com.xumuk.realism.packets.DaySyncMessage;
-import com.xumuk.realism.packets.MonthSyncMessage;
-import com.xumuk.realism.packets.NetworkHandler;
-import com.xumuk.realism.packets.YearSyncMessage;
+import com.xumuk.realism.packets.Client.DaySyncMessage;
+import com.xumuk.realism.packets.Client.MonthSyncMessage;
+import com.xumuk.realism.packets.Client.YearSyncMessage;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -71,7 +72,7 @@ public class RealismCommand extends CommandBase {
 					}
 					cap.setDay(Byte.parseByte(value)); 
 					player.sendMessage(new TextComponentString("Set the day: " + Byte.parseByte(value)));
-					NetworkHandler.sendTo(new DaySyncMessage(Byte.parseByte(value)),(EntityPlayerMP)player);
+					network_handler.sendTo(new DaySyncMessage(Byte.parseByte(value)),(EntityPlayerMP)player);
 				} 
 				if (amount.equals("month")) { 
 					if(Byte.parseByte(value) == 0) {
@@ -79,12 +80,12 @@ public class RealismCommand extends CommandBase {
 					}
 					cap.setMonth(Byte.parseByte(value)); 
 					player.sendMessage(new TextComponentString("Set the month: " + Byte.parseByte(value)));
-					NetworkHandler.sendTo(new MonthSyncMessage(cap.getMonth()),(EntityPlayerMP)player);
+					network_handler.sendTo(new MonthSyncMessage(cap.getMonth()),(EntityPlayerMP)player);
 				} 
 				if (amount.equals("year")) { 
 					cap.setYear(Integer.parseInt(value)); 
 					player.sendMessage(new TextComponentString("Set the year: " + Integer.parseInt(value)));
-					NetworkHandler.sendTo(new YearSyncMessage(cap.getYear()),(EntityPlayerMP)player);
+					network_handler.sendTo(new YearSyncMessage(cap.getYear()),(EntityPlayerMP)player);
 				} 
 				if (amount.equals("datanull")) { 
 					cap.setDay((byte)0); 
@@ -97,7 +98,7 @@ public class RealismCommand extends CommandBase {
 					player.sendMessage(new TextComponentString("Set the day: " + Byte.parseByte(value)));
 					player.sendMessage(new TextComponentString("Set the month: " + Byte.parseByte(value)));
 					player.sendMessage(new TextComponentString("Set the year: " + Integer.parseInt(value)));
-					NetworkHandler.sendTo(new YearSyncMessage(cap.getYear()),(EntityPlayerMP)player);
+					network_handler.sendTo(new YearSyncMessage(cap.getYear()),(EntityPlayerMP)player);
 				} 
 				break;
 			}

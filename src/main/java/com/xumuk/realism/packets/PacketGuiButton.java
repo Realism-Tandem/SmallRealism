@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import com.xumuk.realism.RealismCore;
 import com.xumuk.realism.utils.IButtonHandler;
 
-import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -25,7 +25,7 @@ public class PacketGuiButton extends SRSimplePacket {
 	}
 
 	@Override
-	public void client(EntityPlayerSP player, MessageContext ctx) {}
+	public void client(EntityPlayer player, MessageContext ctx) {}
 
 	@Override
 	public void server(EntityPlayerMP player, MessageContext ctx) {

@@ -4,6 +4,12 @@ import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 import static net.minecraftforge.fml.relauncher.Side.SERVER;
 
 import com.xumuk.realism.RealismCore;
+import com.xumuk.realism.packets.Client.DaySyncMessage;
+import com.xumuk.realism.packets.Client.MonthSyncMessage;
+import com.xumuk.realism.packets.Client.YearSyncMessage;
+import com.xumuk.realism.packets.Server.DaySyncMessageServer;
+import com.xumuk.realism.packets.Server.MonthSyncMessageServer;
+import com.xumuk.realism.packets.Server.YearSyncMessageServer;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -15,15 +21,21 @@ public class NetworkHandler {
 
 	private short id;
 
-	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
+	public final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
 
 	public void init() throws Exception {
 		// network.registerMessage(WSDCoordToClient.Handler.class,
 		// WSDCoordToClient.class, 5, Side.CLIENT);
 
-		registerMessage(DaySyncMessage.class);
-		registerMessage(MonthSyncMessage.class);
-		registerMessage(YearSyncMessage.class);
+		NETWORK.registerMessage(MonthSyncMessageServer.Handler.class, MonthSyncMessageServer.class, 1, SERVER);
+		NETWORK.registerMessage(MonthSyncMessage.Handler.class, MonthSyncMessage.class, 2, CLIENT);
+        
+		NETWORK.registerMessage(DaySyncMessageServer.Handler.class, DaySyncMessageServer.class, 3, SERVER);
+        NETWORK.registerMessage(DaySyncMessage.Handler.class, DaySyncMessage.class, 4, CLIENT);
+        
+        NETWORK.registerMessage(YearSyncMessageServer.Handler.class,YearSyncMessageServer.class, 5, SERVER);
+        NETWORK.registerMessage(YearSyncMessage.Handler.class, YearSyncMessage.class, 6, CLIENT);
+        
 		registerMessage(PacketGuiButton.class, SERVER);
 		
 		// network.registerMessage(PlayerWeightMessage.Handler.class,
@@ -32,6 +44,7 @@ public class NetworkHandler {
 		// PlayerWeightMessageServer.class, 5, Side.SERVER);
 	}
 
+	@SuppressWarnings("unused")
 	private void registerMessage(Class<? extends SRSimplePacket> packet) throws Exception {
 		NETWORK.registerMessage(packet.newInstance(), packet, id++, SERVER);
 		NETWORK.registerMessage(packet.newInstance(), packet, id++, CLIENT);
@@ -41,15 +54,15 @@ public class NetworkHandler {
 		NETWORK.registerMessage(packet.newInstance(), packet, id++, side);
 	}
 	
-    public static void sendToAll(SRSimplePacket packet) {
+    public void sendToAll(final IMessage packet) {
         NETWORK.sendToAll(packet);
     }
 
-	public static void sendTo(final IMessage message, final EntityPlayerMP player) {
+	public void sendTo(final IMessage message, final EntityPlayerMP player) {
 		NETWORK.sendTo(message, player);
 	}
 
-	public static void sendToServer(final IMessage message) {
+	public void sendToServer(final IMessage message) {
 		NETWORK.sendToServer(message);
 	}
 }

@@ -1,11 +1,12 @@
 package com.xumuk.realism.event.Server;
 
+import static com.xumuk.realism.RealismCore.network_handler;
+
 import com.xumuk.realism.capability.worldCAP.DateProvider;
 import com.xumuk.realism.capability.worldCAP.IDate;
-import com.xumuk.realism.packets.DaySyncMessage;
-import com.xumuk.realism.packets.MonthSyncMessage;
-import com.xumuk.realism.packets.NetworkHandler;
-import com.xumuk.realism.packets.YearSyncMessage;
+import com.xumuk.realism.packets.Client.DaySyncMessage;
+import com.xumuk.realism.packets.Client.MonthSyncMessage;
+import com.xumuk.realism.packets.Client.YearSyncMessage;
 
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,10 +21,12 @@ public class SeasonEventerServer {
 	@SubscribeEvent
 	public void syncDate(EntityJoinWorldEvent e) {
 		IDate date = e.getWorld().getCapability(DateProvider.DATE, null);
-		NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
-		NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
-		NetworkHandler.sendToAll(new YearSyncMessage(date.getYear()));
-
+		System.out.println(date.getDay());
+		System.out.println(date.getMonth());
+		System.out.println(date.getYear());
+		network_handler.sendToAll(new DaySyncMessage(date.getDay()));
+		network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
+		network_handler.sendToAll(new YearSyncMessage(date.getYear()));
 	}
 
 	@SubscribeEvent
@@ -38,23 +41,23 @@ public class SeasonEventerServer {
 					date.setDay(day);
 					e.world.setWorldTime(0);
 
-					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
+					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
 				}
 				if (date.getDay() >= 30) {
 					month = (byte) (date.getMonth() + 1);
 					date.setMonth(month);
 					date.setDay((byte) 1);
-					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
-					NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
+					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
+					network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
 				}
 				if (date.getMonth() > 11) {
 					year = (date.getYear() + 1);
 					date.setYear(year);
 					date.setDay((byte) 1);
 					date.setMonth((byte) 0);
-					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
-					NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
-					NetworkHandler.sendToAll(new YearSyncMessage(date.getYear()));
+					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
+					network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
+					network_handler.sendToAll(new YearSyncMessage(date.getYear()));
 				}
 			}
 		}
