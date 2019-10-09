@@ -1,6 +1,10 @@
 package com.xumuk.realism.proxy;
 
+import static com.xumuk.realism.RealismCore.logger;
+
 import javax.annotation.Nonnull;
+
+import org.apache.logging.log4j.Level;
 
 import com.xumuk.realism.RealismCore;
 import com.xumuk.realism.RegBlocks;
@@ -30,7 +34,13 @@ public class CommonProxy implements IProxy {
 
 		CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
 		CapabilityManager.INSTANCE.register(IDate.class, DateStorage.INSTANCE, DateStorage.INSTANCE);
-		RealismCore.network_handler.init();
+		
+		try {
+			RealismCore.network_handler.init();
+		} catch (Exception e) {
+			logger.log(Level.FATAL, "Packets don't registered! This is fatal error.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -40,11 +50,12 @@ public class CommonProxy implements IProxy {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {}
-	
+
 	@Override
 	@Nonnull
 	public IThreadListener getThreadListener(MessageContext context) throws Exception {
 		if (context.side.isServer()) return context.getServerHandler().player.mcServer;
-		else throw new Exception("Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
+		else throw new Exception(
+				"Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
 	}
 }

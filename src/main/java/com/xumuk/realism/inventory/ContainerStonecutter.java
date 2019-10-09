@@ -32,4 +32,6 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 	protected void addContainerSlots() {
 		addSlotToContainer(new SlotStoneOutput(new ItemStackHandler(1), 0, 128, 44, matrix::removeAll));
 	}
+	
+	//TODO: Add requires reset matrix without packets
 }
