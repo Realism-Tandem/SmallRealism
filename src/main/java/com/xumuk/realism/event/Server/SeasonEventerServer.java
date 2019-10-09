@@ -21,9 +21,6 @@ public class SeasonEventerServer {
 	@SubscribeEvent
 	public void syncDate(EntityJoinWorldEvent e) {
 		IDate date = e.getWorld().getCapability(DateProvider.DATE, null);
-		System.out.println(date.getDay());
-		System.out.println(date.getMonth());
-		System.out.println(date.getYear());
 		network_handler.sendToAll(new DaySyncMessage(date.getDay()));
 		network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
 		network_handler.sendToAll(new YearSyncMessage(date.getYear()));

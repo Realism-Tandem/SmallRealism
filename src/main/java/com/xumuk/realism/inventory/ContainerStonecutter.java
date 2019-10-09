@@ -12,11 +12,10 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class ContainerStonecutter extends SRContainer implements IButtonHandler {
 
-	private CraftMatrixBool matrix;
+	private CraftMatrixBool matrix = new CraftMatrixBool();
 
 	public ContainerStonecutter(InventoryPlayer playerInv, World world) {
 		super(playerInv, world);
-		matrix = new CraftMatrixBool();
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 	public boolean isRequiresReset() { return matrix.isDirty(); }
 
 	@Override
-	protected void addContainerSlots() {
+	public void addContainerSlots() {
 		addSlotToContainer(new SlotStoneOutput(new ItemStackHandler(1), 0, 128, 44, matrix::removeAll));
 	}
 }

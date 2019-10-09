@@ -13,7 +13,7 @@ public abstract class SRContainer extends Container {
 
 	public SRContainer(InventoryPlayer playerInv, World world) {
 		this.world = world;
-		addContainerSlots();
+		this.addContainerSlots();
 		addPlayerInventorySlots(playerInv);
 	}
 
@@ -58,7 +58,7 @@ public abstract class SRContainer extends Container {
 		return itemstack;
 	}
 
-	protected abstract void addContainerSlots();
+	public abstract void addContainerSlots();
 
 	protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
 		for (int i = 0; i < 3; i++) {
