@@ -15,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 
 public class NetworkHandler {
 
@@ -27,31 +26,21 @@ public class NetworkHandler {
 		// network.registerMessage(WSDCoordToClient.Handler.class,
 		// WSDCoordToClient.class, 5, Side.CLIENT);
 
-		NETWORK.registerMessage(MonthSyncMessageServer.Handler.class, MonthSyncMessageServer.class, 1, SERVER);
-		NETWORK.registerMessage(MonthSyncMessage.Handler.class, MonthSyncMessage.class, 2, CLIENT);
+		NETWORK.registerMessage(MonthSyncMessageServer.Handler.class, MonthSyncMessageServer.class, id++, SERVER);
+		NETWORK.registerMessage(MonthSyncMessage.Handler.class, MonthSyncMessage.class, id++, CLIENT);
         
-		NETWORK.registerMessage(DaySyncMessageServer.Handler.class, DaySyncMessageServer.class, 3, SERVER);
-        NETWORK.registerMessage(DaySyncMessage.Handler.class, DaySyncMessage.class, 4, CLIENT);
+		NETWORK.registerMessage(DaySyncMessageServer.Handler.class, DaySyncMessageServer.class, id++, SERVER);
+        NETWORK.registerMessage(DaySyncMessage.Handler.class, DaySyncMessage.class, id++, CLIENT);
         
-        NETWORK.registerMessage(YearSyncMessageServer.Handler.class,YearSyncMessageServer.class, 5, SERVER);
-        NETWORK.registerMessage(YearSyncMessage.Handler.class, YearSyncMessage.class, 6, CLIENT);
+        NETWORK.registerMessage(YearSyncMessageServer.Handler.class,YearSyncMessageServer.class, id++, SERVER);
+        NETWORK.registerMessage(YearSyncMessage.Handler.class, YearSyncMessage.class, id++, CLIENT);
         
-		registerMessage(PacketGuiButton.class, SERVER);
+        NETWORK.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, id++, SERVER);
 		
 		// network.registerMessage(PlayerWeightMessage.Handler.class,
 		// PlayerWeightMessage.class, 4, Side.CLIENT);
 		// network.registerMessage(PlayerWeightMessageServer.Handler.class,
 		// PlayerWeightMessageServer.class, 5, Side.SERVER);
-	}
-
-	@SuppressWarnings("unused")
-	private void registerMessage(Class<? extends SRSimplePacket> packet) throws Exception {
-		NETWORK.registerMessage(packet.newInstance(), packet, id++, SERVER);
-		NETWORK.registerMessage(packet.newInstance(), packet, id++, CLIENT);
-	}
-	
-	private void registerMessage(Class<? extends SRSimplePacket> packet, Side side) throws Exception {
-		NETWORK.registerMessage(packet.newInstance(), packet, id++, side);
 	}
 	
     public void sendToAll(final IMessage packet) {

@@ -1,6 +1,7 @@
 package com.xumuk.realism.proxy;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
@@ -16,6 +17,7 @@ import com.xumuk.realism.capability.worldCAP.DateStorage;
 import com.xumuk.realism.capability.worldCAP.IDate;
 import com.xumuk.realism.event.RegEvents;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -58,5 +60,12 @@ public class CommonProxy implements IProxy {
 		if (context.side.isServer()) return context.getServerHandler().player.mcServer;
 		else throw new Exception(
 				"Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
+	}
+
+	@Override
+	@Nullable
+	public EntityPlayer getPlayer(MessageContext context) throws Exception {
+		if (context.side.isServer()) return context.getServerHandler().player;
+		else throw new Exception("Tried to get the player from a client-side MessageContext on the dedicated server");
 	}
 }

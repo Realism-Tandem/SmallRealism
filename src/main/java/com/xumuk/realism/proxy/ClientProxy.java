@@ -1,12 +1,14 @@
 package com.xumuk.realism.proxy;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.xumuk.realism.RegBlocks;
 import com.xumuk.realism.RegItems;
 import com.xumuk.realism.event.RegEvents;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -35,7 +37,14 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	@Nonnull
 	public IThreadListener getThreadListener(MessageContext context) {
-        if (context.side.isClient()) return Minecraft.getMinecraft();
-        else return context.getServerHandler().player.mcServer;
+		if (context.side.isClient()) return Minecraft.getMinecraft();
+		else return context.getServerHandler().player.mcServer;
+	}
+
+	@Override
+	@Nullable
+	public EntityPlayer getPlayer(MessageContext context) {
+		if (context.side.isClient()) return Minecraft.getMinecraft().player;
+		else return context.getServerHandler().player;
 	}
 }

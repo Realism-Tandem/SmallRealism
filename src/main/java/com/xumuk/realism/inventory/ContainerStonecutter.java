@@ -6,7 +6,6 @@ import com.xumuk.realism.utils.IButtonHandler;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -19,7 +18,7 @@ public class ContainerStonecutter extends SRContainer implements IButtonHandler 
 	}
 
 	@Override
-	public void onButtonPress(int idX, int idY, NBTTagCompound extraNBT) {
+	public void onButtonPress(int idX, int idY) {
 		ItemStack out = matrix.set(idX, idY);
 		if (out != ItemStack.EMPTY) putStackInSlot(0, out);
 	}

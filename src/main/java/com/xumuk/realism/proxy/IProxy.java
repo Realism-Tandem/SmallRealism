@@ -2,6 +2,7 @@ package com.xumuk.realism.proxy;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -17,4 +18,6 @@ public interface IProxy {
 	public void postInit(FMLPostInitializationEvent event);
 	
 	@Nonnull public IThreadListener getThreadListener(MessageContext context) throws Exception;
+	
+	public EntityPlayer getPlayer(MessageContext ctx) throws Exception;
 }
