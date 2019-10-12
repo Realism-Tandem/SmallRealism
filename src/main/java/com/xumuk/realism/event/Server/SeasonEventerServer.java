@@ -1,9 +1,8 @@
 package com.xumuk.realism.event.Server;
 
-import static com.xumuk.realism.RealismCore.network_handler;
-
 import com.xumuk.realism.capability.worldCAP.DateProvider;
 import com.xumuk.realism.capability.worldCAP.IDate;
+import com.xumuk.realism.packets.NetworkHandler;
 import com.xumuk.realism.packets.Client.DaySyncMessage;
 import com.xumuk.realism.packets.Client.MonthSyncMessage;
 import com.xumuk.realism.packets.Client.YearSyncMessage;
@@ -21,9 +20,9 @@ public class SeasonEventerServer {
 	@SubscribeEvent
 	public void syncDate(EntityJoinWorldEvent e) {
 		IDate date = e.getWorld().getCapability(DateProvider.DATE, null);
-		network_handler.sendToAll(new DaySyncMessage(date.getDay()));
-		network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
-		network_handler.sendToAll(new YearSyncMessage(date.getYear()));
+		NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
+		NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
+		NetworkHandler.sendToAll(new YearSyncMessage(date.getYear()));
 	}
 
 	@SubscribeEvent
@@ -38,23 +37,23 @@ public class SeasonEventerServer {
 					date.setDay(day);
 					e.world.setWorldTime(0);
 
-					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
+					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
 				}
 				if (date.getDay() >= 30) {
 					month = (byte) (date.getMonth() + 1);
 					date.setMonth(month);
 					date.setDay((byte) 1);
-					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
-					network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
+					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
+					NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
 				}
 				if (date.getMonth() > 11) {
 					year = (date.getYear() + 1);
 					date.setYear(year);
 					date.setDay((byte) 1);
 					date.setMonth((byte) 0);
-					network_handler.sendToAll(new DaySyncMessage(date.getDay()));
-					network_handler.sendToAll(new MonthSyncMessage(date.getMonth()));
-					network_handler.sendToAll(new YearSyncMessage(date.getYear()));
+					NetworkHandler.sendToAll(new DaySyncMessage(date.getDay()));
+					NetworkHandler.sendToAll(new MonthSyncMessage(date.getMonth()));
+					NetworkHandler.sendToAll(new YearSyncMessage(date.getYear()));
 				}
 			}
 		}

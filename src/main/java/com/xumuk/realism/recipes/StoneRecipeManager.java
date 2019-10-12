@@ -1,8 +1,8 @@
 package com.xumuk.realism.recipes;
 
 import java.util.Arrays;
-
-import javax.annotation.Nullable;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 import com.xumuk.realism.utils.SRUtils;
 
@@ -11,30 +11,29 @@ import net.minecraft.item.ItemStack;
 public class StoneRecipeManager extends BasicRecipeManager<ItemStack, boolean[][]>{
 
 	public StoneRecipeManager() {
-		super((rec1, rec2) -> Arrays.deepEquals((boolean[][])rec1, (boolean[][])rec2));
+		super((rec1, rec2) -> Arrays.deepEquals((boolean[][])rec1, (boolean[][])rec2), "Stone recipe manager");
 	}
 	
 	@Override
 	public ItemStack constainsAndGetValue(boolean[][] matrix) {
-		return values()
+		System.out.println("Succes");
+		Arrays.asList(matrix).forEach(System.out::println);
+		Optional<Entry<ItemStack, boolean[][]>> optional = values()
 				.entrySet()
 				.stream()
 				.filter(e -> (boolean)isRecipeEqual(e.getValue(), matrix))
-				.findFirst()
-				.orElse(null)
-				.getKey();
-	}
-	
-	public void putStoneRecipe(int[][] recipe, ItemStack output) {
-		putRecipe(parseRecipe(recipe), output);
-	}
-	
-	@Nullable
-	private boolean[][] parseRecipe(int[][] recipe) {
-		boolean[][] matrix = new boolean[recipe.length][recipe[0].length];
-		for (int x = 0; x < recipe.length; ++x) {
-			for (int y = 0; y < recipe[x].length; ++y) { matrix[x][y] = SRUtils.intToBoolean(recipe[x][y]); }
+				.findFirst();
+		if (optional.isPresent()) {
+			System.out.println(optional.get().getKey().getItem().getUnlocalizedName());
 		}
-		return matrix;
+		else {
+			System.out.println("Null");
+		}
+		return optional.isPresent() ? optional.get().getKey() : ItemStack.EMPTY;
+	}
+	
+	@Override
+	protected void putIntegerRecipe(int[][] recipe, ItemStack output) {
+		putRecipe(SRUtils.parseRecipeToBoolean(recipe), output);
 	}
 }

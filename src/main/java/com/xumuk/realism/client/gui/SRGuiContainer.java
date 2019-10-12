@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class SRGuiContainer extends GuiContainer {
+public abstract class SRGuiContainer extends GuiContainer {
 	
 	private final InventoryPlayer playerInv;
     private final ResourceLocation background;
@@ -32,7 +32,10 @@ public class SRGuiContainer extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         drawSimpleBackground();
+        drawForegroundBackground();
     }
+    
+    protected abstract void drawForegroundBackground();
 
     protected final void drawSimpleBackground() {
         GlStateManager.color(1, 1, 1, 1);

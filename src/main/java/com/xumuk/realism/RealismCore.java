@@ -2,7 +2,6 @@ package com.xumuk.realism;
 
 import com.xumuk.realism.command.RealismCommand;
 import com.xumuk.realism.creativetabs.MainRealism;
-import com.xumuk.realism.packets.NetworkHandler;
 import com.xumuk.realism.proxy.IProxy;
 import com.xumuk.realism.utils.SRLogManager;
 
@@ -22,7 +21,6 @@ public class RealismCore {
 	public static final String VERSION = "0.1 alpha";
 	public static CreativeTabs tabMain = new MainRealism("tabMain");
 	public static SRLogManager logger = new SRLogManager();
-	public static NetworkHandler network_handler = new NetworkHandler();
 
 	@Mod.Instance 
 	public static RealismCore INSTANCE;

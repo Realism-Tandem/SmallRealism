@@ -3,11 +3,10 @@ package com.xumuk.realism.proxy;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.Level;
-
 import com.xumuk.realism.RealismCore;
 import com.xumuk.realism.RegBlocks;
 import com.xumuk.realism.RegItems;
+import com.xumuk.realism.RegRecipes;
 import com.xumuk.realism.SRGuiHandler;
 import com.xumuk.realism.capability.playerCAP.IPlayerCap;
 import com.xumuk.realism.capability.playerCAP.PlayerCap;
@@ -15,6 +14,7 @@ import com.xumuk.realism.capability.playerCAP.PlayerCapStorage;
 import com.xumuk.realism.capability.worldCAP.DateStorage;
 import com.xumuk.realism.capability.worldCAP.IDate;
 import com.xumuk.realism.event.RegEvents;
+import com.xumuk.realism.packets.NetworkHandler;
 import com.xumuk.realism.recipes.ListRecipeManager;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,22 +37,19 @@ public class CommonProxy implements IProxy {
 		CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
 		CapabilityManager.INSTANCE.register(IDate.class, DateStorage.INSTANCE, DateStorage.INSTANCE);
 
-		try {
-			RealismCore.network_handler.init();
-		} catch (Exception e) {
-			RealismCore.logger.log(Level.FATAL, "Packets don't registered! This is fatal error.");
-			e.printStackTrace();
-		}
+		NetworkHandler.init();
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(RealismCore.INSTANCE, new SRGuiHandler());
-		ListRecipeManager.init();
+		ListRecipeManager.initManagers();
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		RegRecipes.registerRecipes();
+	}
 
 	@Override
 	@Nonnull

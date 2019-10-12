@@ -18,11 +18,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class NetworkHandler {
 
-	private short id;
+	private static short id;
 
-	public final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
+	public static SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(RealismCore.MODID);
 
-	public void init() throws Exception {
+	public static void init() {
 		// network.registerMessage(WSDCoordToClient.Handler.class,
 		// WSDCoordToClient.class, 5, Side.CLIENT);
 
@@ -43,15 +43,15 @@ public class NetworkHandler {
 		// PlayerWeightMessageServer.class, 5, Side.SERVER);
 	}
 	
-    public void sendToAll(final IMessage packet) {
+    public static void sendToAll(final IMessage packet) {
         NETWORK.sendToAll(packet);
     }
 
-	public void sendTo(final IMessage message, final EntityPlayerMP player) {
+	public static void sendTo(final IMessage message, final EntityPlayerMP player) {
 		NETWORK.sendTo(message, player);
 	}
 
-	public void sendToServer(final IMessage message) {
+	public static void sendToServer(final IMessage message) {
 		NETWORK.sendToServer(message);
 	}
 }

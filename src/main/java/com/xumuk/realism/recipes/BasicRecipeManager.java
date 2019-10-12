@@ -6,14 +6,21 @@ import java.util.function.BiFunction;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
+import com.xumuk.realism.RealismCore;
+
 import net.minecraft.item.ItemStack;
 
 public abstract class BasicRecipeManager<Result, Matrix> {
-	private Map<Result, Matrix> RECIPES = new HashMap();
+	private final Map<Result, Matrix> RECIPES = new HashMap();
 	private final BiFunction compareFunction;
+	private final String name;
 
-	public BasicRecipeManager(BiFunction compareFunction) {
+	public BasicRecipeManager(BiFunction compareFunction, @Nullable String name) {
 		this.compareFunction = compareFunction;
+		this.name = name;
+		if(name != null) RealismCore.logger.log(Level.INFO, "Init Recipe Managers: " + name);
 	}
 
 	public boolean constainsValue(Matrix matrix) {
@@ -21,16 +28,19 @@ public abstract class BasicRecipeManager<Result, Matrix> {
 	}
 
 	@Nullable public abstract Result constainsAndGetValue(Matrix matrix);
+	protected abstract void putIntegerRecipe(int[][] recipe, ItemStack output);
 	
-	public void putRecipe(Matrix recipe, Result output) {
+	protected void putRecipe(Matrix recipe, Result output) {
 		RECIPES.put(output, recipe);
 	}
 
-	public Matrix removeRecipe(ItemStack output) {
+	public Matrix removeRecipe(Result output) {
 		return RECIPES.remove(output);
 	}
 
-	public Matrix getRecipe(ItemStack output) {
+	public String getName() { return name; }
+
+	public Matrix getRecipe(Result output) {
 		return RECIPES.get(output);
 	}
 

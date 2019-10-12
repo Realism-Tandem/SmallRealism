@@ -2,44 +2,40 @@ package com.xumuk.realism.client.button;
 
 import javax.annotation.Nonnull;
 
-import com.xumuk.realism.RealismCore;
+import com.xumuk.realism.packets.NetworkHandler;
 import com.xumuk.realism.packets.PacketGuiButton;
+import com.xumuk.realism.utils.SupplierFunction;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonStone extends GuiButton {
-	private final ResourceLocation texture;
 	private final int idX;
 	private final int idY;
+	private final SupplierFunction render;
 
-	public GuiButtonStone(int id, int idX, int idY, int x, int y, int width, int height, ResourceLocation texture) {
+	public GuiButtonStone(int id, int idX, int idY, int x, int y, int width, int height, SupplierFunction render) {
 		super(id, x, y, width, height, "");
-		this.texture = texture;
 		this.idX = idX;
 		this.idY = idY;
+		this.render = render;
 	}
 
 	public void onClick() {
 		if (this.enabled) {
 			this.visible = false;
-			RealismCore.network_handler.sendToServer(new PacketGuiButton(this.idX, this.idY));
+			NetworkHandler.sendToServer(new PacketGuiButton(this.idX, this.idY));
 		}
 	}
 
 	@Override
 	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
-			GlStateManager.color(1, 1, 1, 1);
-			mc.getTextureManager().bindTexture(texture);
-
+			render.get();		
 			hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-
 			drawModalRectWithCustomSizedTexture(x, y, 0, 0, 16, 16, 16, 16);
 			mouseDragged(mc, mouseX, mouseY);
 		}
